@@ -206,14 +206,19 @@ export default function Home2() {
               Trajetória profissional com foco em dados, IA e liderança técnica
             </p>
           </div>
-          <div className="relative space-y-10 before:absolute before:left-4 before:top-0 before:bottom-0 before:w-px before:bg-white/10">
-            {experienceEntries.map((experience) => (
-              <div key={experience.id} className="relative md:pl-12">
-                <span className="absolute left-2 top-2 w-4 h-4 rounded-full border-2 border-primary bg-slate-950" />
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 space-y-3">
-                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2">
+          <div className="relative space-y-12 before:absolute before:left-6 before:top-0 before:bottom-0 before:w-px before:bg-gradient-to-b before:from-primary/60 before:via-white/20 before:to-transparent">
+            {experienceEntries.map((experience, idx) => (
+              <div key={experience.id} className="relative pl-16">
+                <span className="absolute left-0 top-2 w-8 h-8 rounded-full bg-slate-950 border border-white/10 flex items-center justify-center shadow-lg shadow-primary/30">
+                  <span className="w-3 h-3 rounded-full bg-gradient-to-br from-primary to-secondary" />
+                  {idx < experienceEntries.length - 1 && (
+                    <span className="absolute left-1/2 top-8 -translate-x-1/2 h-full w-px bg-gradient-to-b from-primary/50 to-transparent" aria-hidden="true" />
+                  )}
+                </span>
+                <div className="rounded-3xl border border-white/10 bg-white/5 p-6 space-y-4 hover:border-primary/40 transition-colors">
+                  <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-2">
                     <div>
-                      <p className="text-sm uppercase tracking-[0.4em] text-primary/80">
+                      <p className="text-xs text-primary/80 uppercase tracking-[0.3em]">
                         {experience.date}
                       </p>
                       <h3 className="text-xl font-semibold text-white">{experience.title}</h3>
@@ -231,7 +236,7 @@ export default function Home2() {
                         )}
                       </p>
                     </div>
-                    <p className="text-xs text-slate-400 uppercase tracking-[0.3em]">
+                    <p className="text-xs text-slate-500 uppercase tracking-[0.3em]">
                       {experience.location}
                     </p>
                   </div>
