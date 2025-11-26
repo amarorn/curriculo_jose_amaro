@@ -5,6 +5,7 @@ import {
   Code2,
   Database,
   GitBranch,
+  Github,
   Linkedin,
   Mail,
   MapPin,
@@ -46,6 +47,11 @@ export const socialLinks = [
     label: "LinkedIn",
     href: "https://linkedin.com/in/josé-amaro-40351553",
     icon: Linkedin,
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/amarorn",
+    icon: Github,
   },
 ];
 
