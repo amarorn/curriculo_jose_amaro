@@ -6,7 +6,6 @@ import {
   Mic2,
   Zap,
 } from "lucide-react";
-import { useState } from "react";
 import { LayoutSwitcher } from "@/components/LayoutSwitcher";
 import {
   aiInitiatives,
@@ -26,9 +25,8 @@ import {
 } from "@/data/resume";
 
 export default function Home5() {
-  const [selectedModel, setSelectedModel] = useState(resumeModels[0].id);
-  const activeModel =
-    resumeModels.find((model) => model.id === selectedModel) ?? resumeModels[0];
+  const heroModel =
+    resumeModels.find((model) => model.id === "ia") ?? resumeModels[0];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-emerald-50 via-white to-emerald-100 text-slate-900">
@@ -57,7 +55,7 @@ export default function Home5() {
                 Visão Estratégica
               </p>
               <h1 className="text-4xl font-semibold text-slate-900">{heroInfo.name}</h1>
-              <p className="text-base text-slate-500">{activeModel.heroSubtitle}</p>
+              <p className="text-base text-slate-500">{heroModel.heroSubtitle}</p>
             </div>
             <div className="space-y-3 text-slate-600">
               {profileSummary.map((paragraph, idx) => (
@@ -66,22 +64,23 @@ export default function Home5() {
                 </p>
               ))}
             </div>
-            <div className="flex flex-wrap gap-2">
-              {resumeModels.map((model) => (
-                <button
-                  key={model.id}
-                  type="button"
-                  onClick={() => setSelectedModel(model.id)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-[0.3em] border transition-all ${
-                    selectedModel === model.id
-                      ? "bg-emerald-600 text-white border-emerald-600"
-                      : "border-emerald-200 text-emerald-500 hover:border-emerald-500"
-                  }`}
-                >
-                  {model.label}
-                </button>
-              ))}
-            </div>
+            {heroModel.summary.map((paragraph, idx) => (
+              <p key={`hero-summary-${idx}`} className="text-sm text-slate-500 leading-relaxed">
+                {paragraph}
+              </p>
+            ))}
+            {heroModel.focusHighlights?.length ? (
+              <div className="flex flex-wrap gap-2">
+                {heroModel.focusHighlights.map((focus) => (
+                  <span
+                    key={`hero-focus-${focus}`}
+                    className="px-4 py-1 rounded-full border border-emerald-200 text-xs uppercase tracking-[0.3em] text-emerald-600"
+                  >
+                    {focus}
+                  </span>
+                ))}
+              </div>
+            ) : null}
           </div>
           <div className="rounded-3xl border border-emerald-100 bg-emerald-600 text-white p-6 space-y-4">
             <div className="grid grid-cols-2 gap-4 text-center">

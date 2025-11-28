@@ -6,7 +6,6 @@ import {
   Mic2,
   Zap,
 } from "lucide-react";
-import { useState } from "react";
 import { LayoutSwitcher } from "@/components/LayoutSwitcher";
 import {
   aiInitiatives,
@@ -26,9 +25,8 @@ import {
 } from "@/data/resume";
 
 export default function Home7() {
-  const [selectedModel, setSelectedModel] = useState(resumeModels[0].id);
-  const activeModel =
-    resumeModels.find((model) => model.id === selectedModel) ?? resumeModels[0];
+  const heroModel =
+    resumeModels.find((model) => model.id === "ia") ?? resumeModels[0];
 
   return (
     <div className="min-h-screen bg-[#fdfae7] text-[#1c1917]">
@@ -59,22 +57,23 @@ export default function Home7() {
                 <p key={`profile-${idx}`}>{paragraph}</p>
               ))}
             </div>
-            <div className="flex flex-wrap gap-2">
-              {resumeModels.map((model) => (
-                <button
-                  key={model.id}
-                  type="button"
-                  onClick={() => setSelectedModel(model.id)}
-                  className={`px-4 py-2 rounded-full text-xs uppercase tracking-[0.3em] border transition-all ${
-                    selectedModel === model.id
-                      ? "bg-[#d97706] text-white border-[#d97706]"
-                      : "border-[#f4e3a1] text-[#a16207] hover:border-[#d97706]"
-                  }`}
-                >
-                  {model.label}
-                </button>
+            <div className="space-y-2 text-sm text-[#6b4e16]">
+              {heroModel.summary.map((paragraph, idx) => (
+                <p key={`hero-summary-${idx}`}>{paragraph}</p>
               ))}
             </div>
+            {heroModel.focusHighlights?.length ? (
+              <div className="flex flex-wrap gap-2">
+                {heroModel.focusHighlights.map((focus) => (
+                  <span
+                    key={`hero-focus-${focus}`}
+                    className="px-4 py-1 rounded-full border border-[#f4e3a1] text-xs uppercase tracking-[0.3em] text-[#a16207]"
+                  >
+                    {focus}
+                  </span>
+                ))}
+              </div>
+            ) : null}
           </div>
           <div className="lg:col-span-2 rounded-3xl border border-[#f4e3a1] bg-white p-6 space-y-4">
             <div className="grid grid-cols-3 gap-3 text-center text-xs uppercase tracking-[0.3em] text-[#a16207]">

@@ -8,12 +8,11 @@ import {
   Server,
   Zap,
 } from "lucide-react";
-import { useState } from "react";
 import { LayoutSwitcher } from "@/components/LayoutSwitcher";
 import {
   aiInitiatives,
   articles,
-  certifications,
+  databricksCertifications,
   clientHighlights,
   contactInfo,
   educationEntries,
@@ -29,12 +28,15 @@ import {
   stats,
   talks,
   techStack,
+  otherCertifications,
+  leadershipSpotlight,
 } from "@/data/resume";
 
 export default function Home() {
-  const [selectedModel, setSelectedModel] = useState(resumeModels[0].id);
-  const activeModel =
-    resumeModels.find((model) => model.id === selectedModel) ?? resumeModels[0];
+  const heroModel =
+    resumeModels.find((model) => model.id === "ia") ?? resumeModels[0];
+  const databricksCerts = databricksCertifications;
+  const otherCerts = otherCertifications;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -55,125 +57,221 @@ export default function Home() {
 
       <main className="container py-12 md:py-16">
         <section className="mb-16">
-          <div className="mb-10">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-              Escolha a versão do currículo
-            </p>
-            <div className="flex flex-wrap gap-3 mt-4">
-              {resumeModels.map((model) => (
-                <button
-                  key={model.id}
-                  type="button"
-                  onClick={() => setSelectedModel(model.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
-                    selectedModel === model.id
-                      ? "bg-primary text-primary-foreground border-primary shadow-sm"
-                      : "bg-muted/60 text-muted-foreground border-transparent hover:border-border"
-                  }`}
-                >
-                  {model.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 items-start">
-            <div className="md:col-span-2">
-              <div className="mb-4 flex items-center gap-2">
-                <div className="w-1 h-8 bg-gradient-to-b from-primary to-secondary rounded-full" />
-                <span className="text-sm font-semibold text-primary uppercase tracking-wider">
-                  {activeModel.heroBadge}
-                </span>
+          <div className="rounded-[32px] border border-slate-800 bg-[radial-gradient(circle_at_top,_rgba(120,119,198,0.3),_rgba(2,6,23,0.95))] text-slate-50 p-8 md:p-10 shadow-[0_25px_80px_rgba(2,6,23,0.55)]">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.3em] uppercase text-slate-300 mb-6">
+              <div className="h-1.5 w-8 rounded-full bg-gradient-to-r from-primary to-secondary" />
+              {heroModel.heroBadge}
               </div>
-
-              <h1 className="text-5xl md:text-6xl font-bold mb-4 text-foreground leading-tight">
-                {heroInfo.name}
-              </h1>
-
-              <p className="text-lg text-muted-foreground mb-2 font-medium">
-                {activeModel.heroSubtitle}
-              </p>
-              {activeModel.summary.map((paragraph, idx) => (
-                <p
-                  key={`${selectedModel}-summary-${idx}`}
-                  className={`text-base text-muted-foreground leading-relaxed max-w-2xl ${
-                    idx === activeModel.summary.length - 1 ? "mb-8" : "mb-4"
-                  }`}
-                >
-                  {paragraph}
-                </p>
-              ))}
-
-              {activeModel.focusHighlights?.length ? (
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {activeModel.focusHighlights.map((focus) => (
-                    <span
-                      key={`${selectedModel}-${focus}`}
-                      className="px-3 py-1 rounded-full bg-card border border-border text-xs font-semibold text-muted-foreground"
-                    >
-                      {focus}
-                    </span>
-                  ))}
-                </div>
-              ) : null}
-
-              <div className="flex flex-wrap gap-6 mb-8 text-sm">
-                {contactInfo.map((item) => {
-                  const Icon = item.icon;
-                  if (item.href) {
+            <div className="grid lg:grid-cols-2 gap-10 items-center">
+              <div className="space-y-4">
+                <h1 className="text-4xl md:text-5xl font-bold text-white">{heroInfo.name}</h1>
+                <p className="text-base md:text-lg text-slate-200">{heroModel.heroSubtitle}</p>
+                {heroModel.summary.map((paragraph, idx) => (
+                  <p
+                    key={`hero-summary-${idx}`}
+                    className="text-sm md:text-base text-slate-300 leading-relaxed"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+                {heroModel.focusHighlights?.length ? (
+                  <div className="flex flex-wrap gap-3 pt-2">
+                    {heroModel.focusHighlights.map((focus) => (
+                      <span
+                        key={`hero-focus-${focus}`}
+                        className="px-4 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-semibold tracking-wide text-slate-100"
+                      >
+                        {focus}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
+                <div className="grid sm:grid-cols-2 gap-4 pt-4 text-sm text-slate-200">
+                  {contactInfo.map((item) => {
+                    const Icon = item.icon;
+                    const base =
+                      "flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm";
+                    if (item.href) {
+                      return (
+                        <a key={item.label} href={item.href} className={`${base} hover:border-primary/60`}>
+                          <Icon className="w-4 h-4 text-primary" />
+                          {item.value}
+                        </a>
+                      );
+                    }
                     return (
-                <a
-                        key={item.label}
-                        href={item.href}
-                  className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-                >
-                        <Icon className="w-4 h-4" />
+                      <div key={item.label} className={base}>
+                        <Icon className="w-4 h-4 text-primary" />
                         {item.value}
-                      </a>
+                      </div>
                     );
-                  }
-                  return (
-                    <div
-                      key={item.label}
-                      className="flex items-center gap-2 text-muted-foreground"
-                    >
-                      <Icon className="w-4 h-4" />
-                      {item.value}
+                  })}
                 </div>
-                  );
-                })}
-              </div>
-
-              <div className="flex gap-3">
-                {socialLinks.map((link) => {
-                  const Icon = link.icon;
-                  return (
-                <a
-                      key={link.label}
-                      href={link.href}
+                <div className="flex flex-wrap gap-3">
+                  {socialLinks.map((link) => {
+                    const Icon = link.icon;
+                    return (
+                      <a
+                        key={link.label}
+                        href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity font-medium"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 bg-white/5 text-sm font-medium text-white hover:bg-white/10 transition-colors"
                 >
-                      <Icon className="w-4 h-4" />
-                      {link.label}
+                        <Icon className="w-4 h-4" />
+                        {link.label}
                 </a>
-                  );
-                })}
+                    );
+                  })}
+                </div>
+              </div>
+              {heroInfo.photo?.src && (
+                <div className="relative rounded-3xl border border-white/10 bg-slate-900/40 overflow-hidden">
+                  <div className="aspect-[3/4] w-full">
+                    <img
+                      src={heroInfo.photo.src}
+                      alt={heroInfo.photo.alt}
+                      loading="lazy"
+                      className="h-full w-full object-cover object-center"
+                    />
+                  </div>
+                  <div className="absolute top-4 left-4">
+                    <span className="inline-flex items-center rounded-full border border-white/20 bg-black/40 px-3 py-1 text-xs uppercase tracking-[0.3em] text-white">
+                      {heroInfo.photo.highlight}
+                    </span>
+                  </div>
+                  <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-slate-950/90 via-slate-900/20 to-transparent space-y-1 text-white">
+                    <p className="text-xs uppercase tracking-[0.4em] text-white">{heroInfo.title}</p>
+                    <p className="text-lg font-semibold">{heroInfo.name}</p>
+                    <p className="text-sm text-slate-200">{heroInfo.tagline}</p>
+            </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <div className="rounded-[32px] border border-white/10 bg-slate-950/90 text-white p-8 md:p-10 space-y-6">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div>
+                <p className="text-xs uppercase tracking-[0.4em] text-slate-400">Leadership</p>
+                <h2 className="text-3xl font-bold">{leadershipSpotlight.title}</h2>
+                <p className="text-slate-300">{leadershipSpotlight.subtitle}</p>
+              </div>
+              <span className="text-xs uppercase tracking-[0.5em] text-slate-500">
+                CTO • BeAnalytic & AFX
+              </span>
+                </div>
+            <div className="grid lg:grid-cols-2 gap-6">
+              <div className="space-y-4 text-sm text-slate-200 leading-relaxed">
+                {leadershipSpotlight.summary.map((paragraph, idx) => (
+                  <p key={`lead-summary-${idx}`}>{paragraph}</p>
+                ))}
+                </div>
+              <div className="flex flex-wrap gap-3 lg:justify-end">
+                {leadershipSpotlight.highlights.map((item) => (
+                  <span
+                    key={item}
+                    className="px-4 py-1.5 rounded-full border border-white/15 bg-white/5 text-xs tracking-[0.2em]"
+                  >
+                    {item}
+                  </span>
+                ))}
               </div>
             </div>
+          </div>
+        </section>
 
-            <div className="md:col-span-1">
-              <div className="bg-card border border-border rounded-lg p-6 sticky top-24 space-y-6">
-                {stats.map((stat, idx) => (
-                  <div key={stat.label}>
-                    <p className={`text-2xl md:text-3xl font-bold ${stat.colorClass} mb-1`}>
-                      {stat.value}
-                    </p>
-                    <p className="text-sm text-muted-foreground">{stat.label}</p>
-                    {idx < stats.length - 1 && <div className="h-px bg-border mt-6" />}
+        <section className="mb-16">
+          <div className="rounded-[32px] border border-white/10 bg-gradient-to-b from-slate-950 to-slate-900 p-10 text-white space-y-10">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+              <div>
+                <p className="text-xs uppercase tracking-[0.4em] text-slate-400">Trilha profissional</p>
+                <h2 className="text-3xl font-bold">Stack Técnico & Perfil</h2>
+                <p className="text-slate-300">
+                  Tecnologias, liderança e arquitetura que sustentam os resultados em clientes enterprise.
+            </p>
+          </div>
+              <span className="text-xs uppercase tracking-[0.5em] text-slate-500">
+                BEANALYTIC • ENTERPRISE
+              </span>
+            </div>
+            <div className="grid lg:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                {techStack.map((tech) => {
+              const Icon = tech.icon;
+              return (
+                <div
+                      key={tech.category}
+                      className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-4"
+                >
+                      <div className="flex items-center justify-between">
+                    <div>
+                          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
+                        {tech.category}
+                          </p>
+                          <p className="text-lg font-semibold text-white">{tech.category}</p>
+                    </div>
+                        <div
+                          className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${tech.color} flex items-center justify-center`}
+                        >
+                          <Icon className="w-6 h-6 text-white" />
+                    </div>
                   </div>
-                ))}
+                      <div className="flex flex-wrap gap-2 text-xs">
+                        {tech.items.map((item) => (
+                      <span
+                            key={item}
+                            className="px-3 py-1 rounded-full border border-white/15 text-slate-100"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+              <div className="space-y-6">
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-4 text-slate-200">
+                  <h3 className="text-lg font-semibold text-white">Perfil Profissional</h3>
+                  {profileSummary.map((paragraph, idx) => (
+                    <p key={`profile-${idx}`} className="text-sm leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-4">
+                  <h3 className="text-lg font-semibold text-white">Framework Orion</h3>
+                  <p className="text-sm text-slate-300">
+                    Arquitetura autoral que organiza contextos de dados, governança e delivery em camadas resilientes.
+                  </p>
+                  <div className="grid grid-cols-1 gap-4">
+                    {orionOverview.map((layer) => (
+                      <div key={layer.title} className="rounded-xl border border-white/10 p-4 space-y-2">
+                        <p className="text-xs uppercase tracking-[0.3em] text-primary">{layer.title}</p>
+                        <p className="text-sm text-slate-200">{layer.description}</p>
+                        <ul className="space-y-1 text-xs text-slate-400">
+                          {layer.highlights.map((highlight) => (
+                            <li key={highlight} className="flex gap-2">
+                              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2" />
+                              {highlight}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                  <a
+                    href="https://orion-ake.pages.dev/architecture"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-semibold uppercase tracking-[0.3em] text-primary hover:text-secondary"
+                  >
+                    orion-ake.pages.dev/architecture
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -203,7 +301,7 @@ export default function Home() {
                 <div>
                     <p className="text-lg font-semibold text-foreground">{client.name}</p>
                     <p className="text-sm text-primary font-medium">{client.role}</p>
-                  </div>
+                </div>
                   {client.link && (
                     <a
                       href={client.link}
@@ -228,105 +326,10 @@ export default function Home() {
                 </div>
               </div>
             ))}
-          </div>
-        </section>
-
-        <div className="h-px bg-border my-16" />
-
-        <section className="mb-16">
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold mb-2 text-foreground">Stack Técnico</h2>
-            <p className="text-muted-foreground">
-              Tecnologias e metodologias que domino para arquitetar soluções escaláveis
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            {techStack.map((tech) => {
-              const Icon = tech.icon;
-              return (
-                <div
-                  key={tech.category}
-                  className="bg-card border border-border rounded-lg p-6 hover:border-primary transition-colors group"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                      <h3 className="text-lg font-semibold text-foreground mb-1">
-                        {tech.category}
-                      </h3>
-                    <div
-                      className={`w-10 h-10 rounded-lg bg-gradient-to-br ${tech.color} flex items-center justify-center`}
-                    >
-                      <Icon className="w-5 h-5 text-white" />
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {tech.items.map((item) => (
-                      <span
-                        key={item}
-                        className="px-3 py-1 rounded-full bg-muted text-muted-foreground text-xs font-medium"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Divider */}
-        <div className="h-px bg-border my-16" />
-
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-foreground">Perfil Profissional</h2>
-          <div className="bg-card border border-border rounded-lg p-8 space-y-4 text-muted-foreground leading-relaxed">
-            {profileSummary.map((paragraph, idx) => (
-              <p key={`profile-${idx}`}>{paragraph}</p>
-            ))}
-          </div>
-        </section>
-
-        <div className="h-px bg-border my-16" />
-
-        <section className="mb-16">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
-            <div>
-              <h2 className="text-3xl font-bold text-foreground">Framework Orion</h2>
-              <p className="text-muted-foreground">
-                Arquitetura proprietária para pipelines resilientes e governáveis
-              </p>
             </div>
-            <a
-              href="https://orion-ake.pages.dev/architecture"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs font-semibold uppercase tracking-[0.3em] text-primary hover:text-secondary"
-            >
-              orion-ake.pages.dev/architecture
-            </a>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {orionOverview.map((layer) => (
-              <div
-                key={layer.title}
-                className="bg-card border border-border rounded-2xl p-6 space-y-3 hover:border-primary transition-colors"
-              >
-                <p className="text-xs uppercase tracking-[0.3em] text-primary mb-1">{layer.title}</p>
-                <p className="text-sm text-muted-foreground">{layer.description}</p>
-                <ul className="space-y-2 text-xs text-muted-foreground/80">
-                  {layer.highlights.map((highlight) => (
-                    <li key={highlight} className="flex gap-2">
-                      <span className="w-1 h-1 rounded-full bg-primary mt-2" />
-                      {highlight}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
         </section>
 
-        <div className="h-px bg-border my-16" />
+         <div className="h-px bg-border my-16" />
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-8 text-foreground">Experiência Profissional</h2>
@@ -351,7 +354,7 @@ export default function Home() {
                     </p>
                 </div>
                   <span className="text-sm text-muted-foreground font-medium">{experience.date}</span>
-                </div>
+              </div>
                 <p className="text-sm text-muted-foreground mb-3">{experience.location}</p>
                 <p className="text-muted-foreground mb-4">{experience.description}</p>
               <div className="grid sm:grid-cols-2 gap-3">
@@ -423,17 +426,17 @@ export default function Home() {
                   <h4 className="text-lg font-semibold text-foreground">{education.course}</h4>
                   <p className="text-primary font-medium">{education.institution}</p>
                   <p className="text-sm text-muted-foreground">{education.period}</p>
-                </div>
+              </div>
               ))}
             </div>
           </div>
 
           <div className="space-y-6">
-            <div>
+          <div>
               <h3 className="text-2xl font-bold mb-6 text-foreground flex items-center gap-2">
-                <Code2 className="w-6 h-6 text-secondary" />
+              <Code2 className="w-6 h-6 text-secondary" />
                 Trilha Databricks
-              </h3>
+            </h3>
               <div className="space-y-3 rounded-2xl border border-border bg-card/80 p-5">
                 {databricksCerts.map((cert) => (
                   <div key={cert.name} className="space-y-1 text-sm text-muted-foreground">

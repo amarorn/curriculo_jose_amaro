@@ -6,7 +6,6 @@ import {
   Mic2,
   Zap,
 } from "lucide-react";
-import { useState } from "react";
 import { LayoutSwitcher } from "@/components/LayoutSwitcher";
 import {
   aiInitiatives,
@@ -26,9 +25,8 @@ import {
 } from "@/data/resume";
 
 export default function Home6() {
-  const [selectedModel, setSelectedModel] = useState(resumeModels[0].id);
-  const activeModel =
-    resumeModels.find((model) => model.id === selectedModel) ?? resumeModels[0];
+  const heroModel =
+    resumeModels.find((model) => model.id === "ia") ?? resumeModels[0];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0f172a] via-[#1e1b4b] to-black text-slate-100">
@@ -56,7 +54,7 @@ export default function Home6() {
             <h1 className="text-4xl sm:text-5xl font-semibold text-white leading-tight">
               {heroInfo.name}
             </h1>
-            <p className="text-lg text-slate-400">{activeModel.heroSubtitle}</p>
+            <p className="text-lg text-slate-400">{heroModel.heroSubtitle}</p>
             <div className="space-y-3 text-sm text-slate-300">
               {profileSummary.map((paragraph, idx) => (
                 <p key={`profile-${idx}`} className="leading-relaxed">
@@ -64,22 +62,23 @@ export default function Home6() {
                 </p>
               ))}
             </div>
-            <div className="flex flex-wrap gap-3">
-              {resumeModels.map((model) => (
-                <button
-                  key={model.id}
-                  type="button"
-                  onClick={() => setSelectedModel(model.id)}
-                  className={`px-4 py-2 rounded-full text-xs uppercase tracking-[0.3em] border transition-all ${
-                    selectedModel === model.id
-                      ? "bg-gradient-to-r from-blue-500 to-amber-400 text-black border-transparent shadow-lg shadow-blue-400/40"
-                      : "border-white/30 text-slate-400 hover:text-white hover:border-amber-400"
-                  }`}
-                >
-                  {model.label}
-                </button>
-              ))}
-            </div>
+            {heroModel.summary.map((paragraph, idx) => (
+              <p key={`hero-summary-${idx}`} className="text-sm text-slate-400 leading-relaxed">
+                {paragraph}
+              </p>
+            ))}
+            {heroModel.focusHighlights?.length ? (
+              <div className="flex flex-wrap gap-3">
+                {heroModel.focusHighlights.map((focus) => (
+                  <span
+                    key={`hero-focus-${focus}`}
+                    className="px-4 py-1 rounded-full border border-white/20 text-xs uppercase tracking-[0.3em] text-amber-400"
+                  >
+                    {focus}
+                  </span>
+                ))}
+              </div>
+            ) : null}
           </div>
           <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-blue-950 via-black to-indigo-950 p-6 space-y-4">
             <div className="grid sm:grid-cols-3 gap-4 text-center text-xs uppercase tracking-[0.3em]">

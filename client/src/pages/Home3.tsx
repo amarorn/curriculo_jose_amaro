@@ -8,7 +8,6 @@ import {
   Server,
   Zap,
 } from "lucide-react";
-import { useState } from "react";
 import { LayoutSwitcher } from "@/components/LayoutSwitcher";
 import {
   aiInitiatives,
@@ -33,9 +32,8 @@ import {
 } from "@/data/resume";
 
 export default function Home3() {
-  const [selectedModel, setSelectedModel] = useState(resumeModels[0].id);
-  const activeModel =
-    resumeModels.find((model) => model.id === selectedModel) ?? resumeModels[0];
+  const heroModel =
+    resumeModels.find((model) => model.id === "ia") ?? resumeModels[0];
   const databricksCerts = databricksCertifications;
   const otherCerts = otherCertifications;
 
@@ -64,31 +62,27 @@ export default function Home3() {
               <h1 className="text-3xl font-semibold text-slate-900 leading-tight">
                 {heroInfo.name}
               </h1>
-              <p className="text-base text-slate-600">{activeModel.heroSubtitle}</p>
+              <p className="text-base text-slate-600">{heroModel.heroSubtitle}</p>
             </div>
             <div className="space-y-3 text-sm text-slate-600">
-              {activeModel.summary.map((paragraph, idx) => (
+              {heroModel.summary.map((paragraph, idx) => (
                 <p key={`model-summary-${idx}`} className="leading-relaxed">
                   {paragraph}
                 </p>
               ))}
             </div>
-            <div className="flex flex-wrap gap-2">
-              {resumeModels.map((model) => (
-                <button
-                  key={model.id}
-                  type="button"
-                  onClick={() => setSelectedModel(model.id)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold tracking-[0.3em] uppercase border transition-all ${
-                    selectedModel === model.id
-                      ? "bg-gradient-to-r from-rose-500 to-amber-400 text-white shadow-lg shadow-rose-200"
-                      : "border-rose-100 text-slate-500 hover:text-rose-500"
-                  }`}
-                >
-                  {model.label}
-                </button>
-              ))}
-            </div>
+            {heroModel.focusHighlights?.length ? (
+              <div className="flex flex-wrap gap-2">
+                {heroModel.focusHighlights.map((focus) => (
+                  <span
+                    key={`hero-focus-${focus}`}
+                    className="px-4 py-2 rounded-full text-xs font-semibold tracking-[0.3em] uppercase border border-rose-100 text-slate-500"
+                  >
+                    {focus}
+                  </span>
+                ))}
+              </div>
+            ) : null}
             <div className="grid sm:grid-cols-3 gap-4 text-center">
               {stats.map((stat) => (
                 <div

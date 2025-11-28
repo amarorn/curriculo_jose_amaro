@@ -1,6 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -77,6 +77,59 @@
   --sidebar-accent-foreground: oklch(0.98 0.001 0);
   --sidebar-border: oklch(0.90 0.005 290);
   --sidebar-ring: oklch(0.58 0.25 290);
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  body {
+    background: #020617;
+    color: #f8fafc;
+    margin: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  main {
+    background: #020617 !important;
+  }
+
+  .print-container {
+    max-width: 210mm !important;
+    padding: 8mm 10mm !important;
+    margin: 0 auto !important;
+    background: #020617 !important;
+  }
+
+  .print-section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin: 0 0 4mm !important;
+    padding-top: 4mm;
+    padding-bottom: 4mm;
+  }
+
+  .print-hidden {
+    display: none !important;
+  }
+
+  .print-hero-photo {
+    object-fit: cover;
+    width: 100%;
+    max-height: 180mm;
+  }
+
+  .print-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-container > * + * {
+    margin-top: 4mm !important;
+  }
 }
 
 .dark {

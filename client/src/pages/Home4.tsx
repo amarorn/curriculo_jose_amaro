@@ -11,7 +11,7 @@ import {
   Server,
   Zap,
 } from "lucide-react";
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { LayoutSwitcher } from "@/components/LayoutSwitcher";
 import {
   aiInitiatives,
@@ -34,9 +34,8 @@ import {
 } from "@/data/resume";
 
 export default function Home4() {
-  const [selectedModel, setSelectedModel] = useState(resumeModels[0].id);
-  const activeModel =
-    resumeModels.find((model) => model.id === selectedModel) ?? resumeModels[0];
+  const heroModel =
+    resumeModels.find((model) => model.id === "ia") ?? resumeModels[0];
 
   const derivedMetrics = useMemo(
     () => [
@@ -91,39 +90,23 @@ export default function Home4() {
               <h1 className="text-4xl sm:text-5xl font-semibold text-white leading-tight">
                 {heroInfo.name}
               </h1>
-              <p className="text-lg text-slate-400">{activeModel.heroSubtitle}</p>
+              <p className="text-lg text-slate-400">{heroModel.heroSubtitle}</p>
             </div>
             <div className="grid md:grid-cols-2 gap-4 text-sm text-slate-300">
-              {activeModel.summary.map((paragraph, idx) => (
+              {heroModel.summary.map((paragraph, idx) => (
                 <p key={`intro-${idx}`} className="leading-relaxed">
                   {paragraph}
                 </p>
               ))}
             </div>
             <div className="flex flex-wrap gap-2">
-              {activeModel.focusHighlights?.map((focus) => (
+              {heroModel.focusHighlights?.map((focus) => (
                 <span
                   key={focus}
                   className="px-3 py-1 rounded-full bg-white/10 text-xs font-semibold uppercase tracking-[0.3em] text-teal-300"
                 >
                   {focus}
                 </span>
-              ))}
-            </div>
-            <div className="flex flex-wrap gap-3">
-              {resumeModels.map((model) => (
-                <button
-                  key={model.id}
-                  type="button"
-                  onClick={() => setSelectedModel(model.id)}
-                  className={`px-4 py-2 rounded-full text-xs uppercase tracking-[0.3em] border transition-all ${
-                    selectedModel === model.id
-                      ? "bg-white text-slate-900 border-white shadow-lg"
-                      : "border-white/20 text-slate-400 hover:border-teal-400 hover:text-white"
-                  }`}
-                >
-                  {model.label}
-                </button>
               ))}
             </div>
           </div>

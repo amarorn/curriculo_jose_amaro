@@ -116,21 +116,6 @@ export const resumeModels = [
     ],
   },
   {
-    id: "lideranca",
-    label: "Modelo Liderança Técnica",
-    heroBadge: "CTO & Tech Leadership",
-    heroSubtitle: "Escalando times, microservices e produtos digitais",
-    summary: [
-      "Atuação como CTO na BeAnalytic e na AFX System, liderando squads multidisciplinares e decisões de arquitetura de ponta a ponta.",
-      "Mentoria de líderes técnicos, definição de OKRs e implantação de programas de confiabilidade, segurança e eficiência operacional.",
-    ],
-    focusHighlights: [
-      "Playbooks DevSecOps & SRE",
-      "Programas de liderança técnica",
-      "Portfólio de produtos orientado a dados",
-    ],
-  },
-  {
     id: "ia",
     label: "Modelo IA & LLM",
     heroBadge: "IA Aplicada & LLM Ops",
@@ -146,6 +131,20 @@ export const resumeModels = [
     ],
   },
 ];
+
+export const leadershipSpotlight = {
+  title: "CTO & Liderança Técnica",
+  subtitle: "Escalando squads, arquitetura e governança",
+  summary: [
+    "Atuação como CTO na BeAnalytic e na AFX System, liderando squads multidisciplinares, decisões de arquitetura ponta a ponta e portfólios de produtos orientados a dados.",
+    "Mentoria de líderes técnicos, definição de OKRs e implantação de programas de confiabilidade, segurança e eficiência operacional (DevSecOps/SRE, FinOps e governança).",
+  ],
+  highlights: [
+    "Playbooks DevSecOps & SRE",
+    "Programas de liderança técnica",
+    "Portfólio de produtos orientado a dados",
+  ],
+};
 
 export const profileSummary = [
   "Arquiteto de Dados com trajetória sólida em plataformas de larga escala, cloud computing e integração de sistemas. Experiência abrangente em GCP, AWS, arquitetura orientada a eventos, pipelines distribuídos (NRT/CDC) e modelagem de dados para ambientes analíticos e operacionais.",
@@ -216,12 +215,13 @@ export const experienceEntries = [
     date: "Fev 2025 – Atual",
     location: "Remoto / São Paulo",
     description:
-      "Responsável por arquitetar soluções críticas em um ambiente híbrido, liderando trilhas de modernização que conectam times de negócio, squads de engenharia e governança. Uso intensivo de Python, UC4, BizAgi, Confluence e Google Cloud para garantir fluxos de dados auditáveis e resilientes.",
+      "Responsável por arquitetar soluções críticas em um ambiente híbrido, liderando trilhas de modernização e coordenando o time de engenharia de dados dedicado à área de Suprimentos. Stack Databricks + Azure (Delta Lake, Synapse e Purview) com arquitetura em medalhão, estabelecendo indicadores de governança, automação e redução de SLA crítico, além de Python, UC4, BizAgi e Confluence para garantir fluxos auditáveis e resilientes.",
     highlights: [
-      "Desenho técnico de arquitetura de dados e integração GCP/Node.js",
-      "Governança de pipelines BigQuery, BigTable, Firestore e S3",
-      "Automação de workloads com UC4, BizAgi, Jira e ferramentas ITSM",
-      "Modelagem Archimate, DataFlow e DataOps para squads remotos",
+      "Coordenação de squads de engenharia focados em Suprimentos, alinhando negócio, governança e SLAs",
+      "Arquitetura em medalhão no Databricks Lakehouse sobre Azure Data Lake, Delta Live Tables e Unity Catalog",
+      "Pipelines híbridos com streaming/CDC em Azure Data Factory, Event Hub e integrações GCP/Node.js",
+      "Automação de workloads com UC4, BizAgi, Jira e observabilidade ponta a ponta em ITSM",
+      "Redução de até 35% no SLA crítico de suprimentos e painel de governança Purview/Unity Catalog com indicadores de lineage, quality score e FinOps",
     ],
   },
   {
@@ -431,6 +431,11 @@ export const educationEntries = [
     course: "Análise e Desenvolvimento de Sistemas",
     institution: "UNI-RN",
     period: "2012–2016",
+  },
+  {
+    course: "Pós-graduação em Arquitetura de Dados",
+    institution: "UNIME • RA: 3511992503",
+    period: "2021–2022",
   },
 ];
 

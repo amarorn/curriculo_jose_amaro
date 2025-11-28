@@ -6,7 +6,6 @@ import {
   Mic2,
   Zap,
 } from "lucide-react";
-import { useState } from "react";
 import { LayoutSwitcher } from "@/components/LayoutSwitcher";
 import {
   aiInitiatives,
@@ -29,19 +28,18 @@ import {
   techStack,
   databricksCertifications,
   otherCertifications,
+  leadershipSpotlight,
 } from "@/data/resume";
 
 export default function Home2() {
-  const defaultModelId = resumeModels.find((model) => model.id === "ia")?.id ?? resumeModels[0].id;
-  const [selectedModel, setSelectedModel] = useState(defaultModelId);
-  const activeModel =
-    resumeModels.find((model) => model.id === selectedModel) ?? resumeModels[0];
+  const heroModel =
+    resumeModels.find((model) => model.id === "ia") ?? resumeModels[0];
   const databricksCerts = databricksCertifications;
   const otherCerts = otherCertifications;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100">
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/80 backdrop-blur">
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/80 backdrop-blur print-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
@@ -56,8 +54,8 @@ export default function Home2() {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
-        <section className="grid md:grid-cols-5 gap-8">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16 print-container">
+        <section className="grid md:grid-cols-5 gap-8 print-section">
           <div className="md:col-span-3 space-y-6">
             <p className="text-xs uppercase tracking-[0.4em] text-primary/80">
               Visão Geral
@@ -66,13 +64,32 @@ export default function Home2() {
               <h1 className="text-4xl sm:text-5xl font-semibold text-white leading-tight">
                 {heroInfo.name}
               </h1>
-              <p className="text-lg text-primary/80 mt-2">{activeModel.heroSubtitle}</p>
+              <p className="text-lg text-primary/80 mt-2">{heroModel.heroSubtitle}</p>
             </div>
             {profileSummary.map((paragraph, idx) => (
               <p key={`intro-${idx}`} className="text-slate-300 leading-relaxed">
                 {paragraph}
               </p>
             ))}
+            <div className="space-y-2">
+              {heroModel.summary.map((paragraph, idx) => (
+                <p key={`hero-summary-${idx}`} className="text-sm text-slate-200 leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+            {heroModel.focusHighlights?.length ? (
+              <div className="flex flex-wrap gap-2">
+                {heroModel.focusHighlights.map((focus) => (
+                  <span
+                    key={`hero-focus-${focus}`}
+                    className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs uppercase tracking-[0.25em] text-slate-200"
+                  >
+                    {focus}
+                  </span>
+                ))}
+              </div>
+            ) : null}
             <div className="grid sm:grid-cols-3 gap-6 text-sm">
               {stats.map((stat) => (
                 <div
@@ -126,7 +143,7 @@ export default function Home2() {
             </div>
           </div>
 
-          <div className="md:col-span-2 space-y-6">
+          <div className="md:col-span-2 space-y-6 print-section">
             {heroInfo.photo?.src && (
               <div className="relative rounded-3xl border border-white/10 bg-slate-900/40 overflow-hidden">
                 <div className="aspect-[3/4] w-full">
@@ -134,7 +151,7 @@ export default function Home2() {
                     src={heroInfo.photo.src}
                     alt={heroInfo.photo.alt}
                     loading="lazy"
-                    className="h-full w-full object-cover object-center"
+                    className="h-full w-full object-cover object-center print-hero-photo"
                   />
                 </div>
                 <div className="absolute top-4 left-4">
@@ -143,52 +160,48 @@ export default function Home2() {
                   </span>
                 </div>
                 <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-slate-950/90 via-slate-900/20 to-transparent space-y-1 text-white">
-                  <p className="text-xs uppercase tracking-[0.4em] text-primary/80">{heroInfo.title}</p>
+                  <p className="text-xs uppercase tracking-[0.4em] text-white">{heroInfo.title}</p>
                   <p className="text-lg font-semibold">{heroInfo.name}</p>
                   <p className="text-sm text-slate-200">{heroInfo.tagline}</p>
                 </div>
               </div>
             )}
+          </div>
+        </section>
 
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6 space-y-6">
-              <div className="flex flex-wrap gap-2">
-                {resumeModels.map((model) => (
-                  <button
-                    key={model.id}
-                    type="button"
-                    onClick={() => setSelectedModel(model.id)}
-                    className={`px-4 py-2 rounded-full text-xs font-semibold tracking-[0.2em] uppercase border transition-colors ${
-                      selectedModel === model.id
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "border-white/20 text-slate-400 hover:border-primary/40"
-                    }`}
-                  >
-                    {model.label}
-                  </button>
-                ))}
-              </div>
-              <div className="space-y-3">
-                {activeModel.summary.map((paragraph, idx) => (
-                  <p key={`model-summary-${idx}`} className="text-sm text-slate-300 leading-relaxed">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {activeModel.focusHighlights?.map((focus) => (
-                  <span
-                    key={focus}
-                    className="text-xs tracking-wide uppercase px-3 py-1 rounded-full bg-white/10 border border-white/10 text-slate-300"
-                  >
-                    {focus}
-                  </span>
-                ))}
-              </div>
+        <section className="rounded-3xl border border-white/10 bg-white/5 p-8 space-y-6 print-section">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <p className="text-xs uppercase tracking-[0.4em] text-secondary">
+                Liderança
+              </p>
+              <h2 className="text-2xl font-semibold text-white">{leadershipSpotlight.title}</h2>
+              <p className="text-slate-300">{leadershipSpotlight.subtitle}</p>
+            </div>
+            <span className="text-xs uppercase tracking-[0.5em] text-slate-500">
+              CTO • BeAnalytic & AFX
+            </span>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-3 text-sm text-slate-300 leading-relaxed">
+              {leadershipSpotlight.summary.map((paragraph, idx) => (
+                <p key={`leader-${idx}`}>{paragraph}</p>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-3 md:justify-end">
+              {leadershipSpotlight.highlights.map((item) => (
+                <span
+                  key={item}
+                  className="px-4 py-1 rounded-full border border-white/10 bg-slate-900/40 text-xs uppercase tracking-[0.3em]"
+                >
+                  {item}
+                </span>
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="space-y-6">
+        <section className="space-y-6 print-section">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-semibold text-white">Clientes & Impactos</h2>
             <span className="text-xs uppercase tracking-[0.4em] text-slate-500">
@@ -230,7 +243,7 @@ export default function Home2() {
           </div>
         </section>
 
-        <section className="space-y-10">
+        <section className="space-y-10 print-section">
           <div>
             <h2 className="text-2xl font-semibold text-white">Linha do tempo</h2>
             <p className="text-sm text-slate-400">
@@ -286,7 +299,7 @@ export default function Home2() {
           </div>
         </section>
 
-        <section className="space-y-6">
+        <section className="space-y-6 print-section">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-semibold text-white">Stack técnico</h2>
             <p className="text-xs uppercase tracking-[0.4em] text-slate-500">
@@ -322,7 +335,7 @@ export default function Home2() {
           </div>
         </section>
 
-        <section className="space-y-6">
+        <section className="space-y-6 print-section">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
               <h2 className="text-2xl font-semibold text-white">Framework Orion</h2>
@@ -360,7 +373,7 @@ export default function Home2() {
           </div>
         </section>
 
-        <section className="space-y-6">
+        <section className="space-y-6 print-section">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
               <h2 className="text-2xl font-semibold text-white">IA, LLM & Visão</h2>
@@ -397,7 +410,7 @@ export default function Home2() {
           </div>
         </section>
 
-        <section className="space-y-6">
+        <section className="space-y-6 print-section">
           <h2 className="text-2xl font-semibold text-white">Projetos & Produtos</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {featuredProjects.map((project) => {
@@ -479,7 +492,7 @@ export default function Home2() {
           </div>
         </section>
 
-        <section className="space-y-4">
+        <section className="space-y-4 print-section">
           <div className="flex items-center gap-3">
             <BookOpen className="w-6 h-6 text-primary" />
             <h2 className="text-xl font-semibold text-white">Formação Acadêmica</h2>
