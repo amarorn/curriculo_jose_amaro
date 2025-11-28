@@ -23,16 +23,21 @@ import {
   heroInfo,
   professionalDifferentials,
   resumeModels,
+  orionOverview,
   socialLinks,
   stats,
   talks,
   techStack,
+  databricksCertifications,
+  otherCertifications,
 } from "@/data/resume";
 
 export default function Home3() {
   const [selectedModel, setSelectedModel] = useState(resumeModels[0].id);
   const activeModel =
     resumeModels.find((model) => model.id === selectedModel) ?? resumeModels[0];
+  const databricksCerts = databricksCertifications;
+  const otherCerts = otherCertifications;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-50 via-amber-50 to-white text-slate-900">
@@ -157,6 +162,44 @@ export default function Home3() {
           </div>
         </section>
 
+        <section className="space-y-6">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+            <div>
+              <h2 className="text-2xl font-semibold text-slate-900">Framework Orion</h2>
+              <p className="text-sm text-slate-500">
+                Arquitetura própria para pipelines resilientes e governáveis
+              </p>
+            </div>
+            <a
+              href="https://orion-ake.pages.dev/architecture"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-400 hover:text-amber-500"
+            >
+              orion-ake.pages.dev/architecture
+            </a>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {orionOverview.map((layer) => (
+              <div
+                key={layer.title}
+                className="rounded-3xl border border-rose-100 bg-white/80 p-6 space-y-3 shadow-lg shadow-rose-200/30"
+              >
+                <p className="text-xs uppercase tracking-[0.3em] text-rose-400">{layer.title}</p>
+                <p className="text-sm text-slate-500">{layer.description}</p>
+                <ul className="space-y-2 text-xs text-slate-500">
+                  {layer.highlights.map((item) => (
+                    <li key={item} className="flex gap-2">
+                      <span className="w-1 h-1 rounded-full bg-rose-400 mt-2" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 rounded-[32px] border border-rose-100 bg-white/80 p-8 space-y-6">
             <div className="flex items-center justify-between">
@@ -248,8 +291,13 @@ export default function Home3() {
             </div>
             <div className="space-y-4">
               {aiInitiatives.map((initiative) => (
-                <div key={initiative.title} className="rounded-2xl border border-amber-100/60 p-4 space-y-2">
-                  <p className="text-xs uppercase tracking-[0.3em] text-amber-500">{initiative.client}</p>
+                <div
+                  key={initiative.title}
+                  className="rounded-2xl border border-amber-100/60 p-4 space-y-2"
+                >
+                  <p className="text-xs uppercase tracking-[0.3em] text-amber-500">
+                    {initiative.client}
+                  </p>
                   <h4 className="text-base font-semibold text-slate-900">{initiative.title}</h4>
                   <p className="text-sm text-slate-600">{initiative.description}</p>
                 </div>
@@ -266,12 +314,17 @@ export default function Home3() {
               {featuredProjects.map((project) => {
                 const Icon = project.icon;
                 return (
-                  <div key={project.title} className="flex items-start gap-3 rounded-2xl border border-rose-100/60 p-4">
+                  <div
+                    key={project.title}
+                    className="flex items-start gap-3 rounded-2xl border border-rose-100/60 p-4"
+                  >
                     <div className="w-10 h-10 rounded-2xl bg-rose-100 text-rose-500 flex items-center justify-center">
                       <Icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-[0.3em] text-rose-300">{project.subtitle}</p>
+                      <p className="text-xs uppercase tracking-[0.3em] text-rose-300">
+                        {project.subtitle}
+                      </p>
                       <h4 className="text-base font-semibold text-slate-900">{project.title}</h4>
                       <p className="text-sm text-slate-600 mt-1">{project.description}</p>
                     </div>
@@ -305,7 +358,10 @@ export default function Home3() {
             </div>
             <div className="space-y-3">
               {talks.map((talk) => (
-                <div key={talk.title} className="rounded-2xl border border-amber-100 p-4 flex items-start gap-3">
+                <div
+                  key={talk.title}
+                  className="rounded-2xl border border-amber-100 p-4 flex items-start gap-3"
+                >
                   <Mic2 className="w-5 h-5 text-amber-500 flex-shrink-0 mt-1" />
                   <div>
                     <p className="text-xs uppercase tracking-[0.3em] text-amber-500">
@@ -332,14 +388,24 @@ export default function Home3() {
                   <p className="text-sm text-slate-600">{education.institution}</p>
                 </div>
               ))}
-              {certifications.map((cert) => (
-                <div key={cert.name} className="rounded-2xl border border-rose-100 p-4">
-                  <p className="text-xs uppercase tracking-[0.3em] text-rose-400">Certificação</p>
+            </div>
+            <div className="space-y-4">
+              <p className="text-xs uppercase tracking-[0.3em] text-rose-400">Trilha Databricks</p>
+              {databricksCertifications.map((cert) => (
+                <div key={cert.name} className="rounded-2xl border border-rose-100 p-4 space-y-1">
                   <h4 className="text-base font-semibold text-slate-900">{cert.name}</h4>
                   <p className="text-sm text-slate-600">{cert.details}</p>
-                  {cert.extra && (
-                    <p className="text-xs text-slate-400 mt-1">{cert.extra}</p>
-                  )}
+                  {cert.extra && <p className="text-xs text-slate-500">{cert.extra}</p>}
+                </div>
+              ))}
+            </div>
+            <div className="space-y-4">
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Outras credenciais</p>
+              {otherCertifications.map((cert) => (
+                <div key={cert.name} className="rounded-2xl border border-amber-100 p-4 space-y-1">
+                  <h4 className="text-base font-semibold text-slate-900">{cert.name}</h4>
+                  <p className="text-sm text-slate-600">{cert.details}</p>
+                  {cert.extra && <p className="text-xs text-slate-500">{cert.extra}</p>}
                 </div>
               ))}
             </div>
@@ -353,7 +419,6 @@ export default function Home3() {
             </div>
           </div>
         </section>
-
         <footer className="text-center text-sm text-slate-500 border-t border-rose-100/80 pt-8">
           <p>{footerInfo.description}</p>
           <p className="text-slate-400 mt-1">{footerInfo.copyright}</p>

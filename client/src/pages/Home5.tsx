@@ -19,6 +19,7 @@ import {
   heroInfo,
   profileSummary,
   resumeModels,
+  orionOverview,
   socialLinks,
   talks,
   techStack,
@@ -120,6 +121,44 @@ export default function Home5() {
                 );
               })}
             </div>
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+            <div>
+              <h2 className="text-2xl font-semibold text-[#064e3b]">Framework Orion</h2>
+              <p className="text-sm text-emerald-600">
+                Arquitetura proprietária para pipelines resilientes e governáveis
+              </p>
+            </div>
+            <a
+              href="https://orion-ake.pages.dev/architecture"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs uppercase tracking-[0.3em] text-emerald-500 hover:text-emerald-700"
+            >
+              orion-ake.pages.dev/architecture
+            </a>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {orionOverview.map((layer) => (
+              <div
+                key={layer.title}
+                className="rounded-3xl border border-emerald-100 bg-white p-6 space-y-3 shadow-lg shadow-emerald-100/60"
+              >
+                <p className="text-xs uppercase tracking-[0.3em] text-emerald-500">{layer.title}</p>
+                <p className="text-sm text-emerald-700">{layer.description}</p>
+                <ul className="space-y-2 text-xs text-emerald-600">
+                  {layer.highlights.map((item) => (
+                    <li key={item} className="flex gap-2">
+                      <span className="w-1 h-1 rounded-full bg-emerald-500 mt-2" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </section>
 

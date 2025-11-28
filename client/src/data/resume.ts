@@ -20,6 +20,11 @@ export const heroInfo = {
     "Especialista em engenharia de dados com mais de uma década construindo soluções críticas em plataformas de larga escala.",
     "Domínio em GCP, AWS, arquitetura orientada a eventos e pipelines distribuídos.",
   ],
+  photo: {
+    src: "/images/jose-amaro.png",
+    alt: "José Amaro apresentando palestra sobre dados",
+    highlight: "Speaker & Data Strategist",
+  },
 };
 
 export const contactInfo = [
@@ -388,6 +393,39 @@ export const professionalDifferentials = [
   "Expertise em transformação digital e modernização de sistemas",
 ];
 
+export const orionOverview = [
+  {
+    title: "Modelo em Camadas",
+    description:
+      "Mantém a lógica das pipelines independente das integrações, aplicando separação clara entre regras de negócio, coordenação e conectores.",
+    highlights: [
+      "Core: entidades e casos de uso como RunPipelineUseCase sem dependências externas",
+      "Application: builders, CLI e runners que orquestram contexto, catálogo e logging",
+      "Infrastructure: conectores para arquivos, warehouses e APIs respeitando o contrato do core",
+    ],
+  },
+  {
+    title: "Fluxo Operacional",
+    description:
+      "Cada execução resolve o catálogo YAML, monta o OrionContext e itera nodes com cache em memória, persistindo outputs conforme a configuração.",
+    highlights: [
+      "CLI aciona PipelineBuilder e repassa para o RunPipelineUseCase",
+      "Inputs lidos de cache ou do DataCatalog → conectores",
+      "Outputs salvos quando existe dataset configurado no catálogo",
+    ],
+  },
+  {
+    title: "Boundaries & Handoff",
+    description:
+      "Atores interagem via CLI e artefatos declarativos; o núcleo em camadas media as chamadas e incentiva colaboração SQL-first entre analistas e engenharia.",
+    highlights: [
+      "Boundaries claros entre operadores, scheduler, catálogos e conectores",
+      "Catálogo centraliza metadados enquanto adaptadores tratam a persistência",
+      "Template de handoff captura requisitos, esboço SQL e matriz de impacto",
+    ],
+  },
+];
+
 export const educationEntries = [
   {
     course: "Análise e Desenvolvimento de Sistemas",
@@ -406,7 +444,48 @@ export const certifications = [
     name: "Formação Complementar",
     details: "Pipelines distribuídos, BigQuery, Dataflow e arquitetura cloud",
   },
+  {
+    name: "Databricks Accredited Databricks Fundamentals",
+    details: "Emitido em 27 jan 2025 • expira em 27 jan 2026",
+    extra: "Databricks Academy Accreditation",
+  },
+  {
+    name: "Preparing for Databricks Certification Exams",
+    details: "Conclusão: 9 nov 2025",
+  },
+  {
+    name: "Databricks Fundamentals (course)",
+    details: "Conclusão: 9 nov 2025",
+  },
+  {
+    name: "SQL Analytics on Databricks",
+    details: "Conclusão: 27 nov 2025",
+  },
+  {
+    name: "Data Management and Governance with Unity Catalog",
+    details: "Conclusão: 27 nov 2025",
+  },
+  {
+    name: "Build Data Pipelines with Lakeflow Spark Declarative Pipelines",
+    details: "Conclusão: 27 nov 2025",
+  },
+  {
+    name: "DevOps Essentials for Data Engineering",
+    details: "Conclusão: 27 nov 2025",
+  },
+  {
+    name: "Data Ingestion with Lakeflow Connect",
+    details: "Conclusão: 27 nov 2025",
+  },
 ];
+
+export const databricksCertifications = certifications.filter((cert) =>
+  cert.name.toLowerCase().includes("databricks"),
+);
+
+export const otherCertifications = certifications.filter(
+  (cert) => !cert.name.toLowerCase().includes("databricks"),
+);
 
 export const footerInfo = {
   copyright: "© 2024 José Amaro. Todos os direitos reservados.",

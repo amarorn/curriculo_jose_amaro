@@ -24,6 +24,7 @@ import {
   professionalDifferentials,
   profileSummary,
   resumeModels,
+  orionOverview,
   socialLinks,
   stats,
   talks,
@@ -288,6 +289,46 @@ export default function Home() {
         <div className="h-px bg-border my-16" />
 
         <section className="mb-16">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+            <div>
+              <h2 className="text-3xl font-bold text-foreground">Framework Orion</h2>
+              <p className="text-muted-foreground">
+                Arquitetura proprietária para pipelines resilientes e governáveis
+              </p>
+            </div>
+            <a
+              href="https://orion-ake.pages.dev/architecture"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-semibold uppercase tracking-[0.3em] text-primary hover:text-secondary"
+            >
+              orion-ake.pages.dev/architecture
+            </a>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {orionOverview.map((layer) => (
+              <div
+                key={layer.title}
+                className="bg-card border border-border rounded-2xl p-6 space-y-3 hover:border-primary transition-colors"
+              >
+                <p className="text-xs uppercase tracking-[0.3em] text-primary mb-1">{layer.title}</p>
+                <p className="text-sm text-muted-foreground">{layer.description}</p>
+                <ul className="space-y-2 text-xs text-muted-foreground/80">
+                  {layer.highlights.map((highlight) => (
+                    <li key={highlight} className="flex gap-2">
+                      <span className="w-1 h-1 rounded-full bg-primary mt-2" />
+                      {highlight}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <div className="h-px bg-border my-16" />
+
+        <section className="mb-16">
           <h2 className="text-3xl font-bold mb-8 text-foreground">Experiência Profissional</h2>
           <div className="space-y-8">
             {experienceEntries.map((experience) => (
@@ -382,26 +423,41 @@ export default function Home() {
                   <h4 className="text-lg font-semibold text-foreground">{education.course}</h4>
                   <p className="text-primary font-medium">{education.institution}</p>
                   <p className="text-sm text-muted-foreground">{education.period}</p>
-              </div>
+                </div>
               ))}
             </div>
           </div>
 
-          <div>
-            <h3 className="text-2xl font-bold mb-8 text-foreground flex items-center gap-2">
-              <Code2 className="w-6 h-6 text-secondary" />
-              Certificações
-            </h3>
-            <div className="space-y-4">
-              {certifications.map((cert) => (
-                <div key={cert.name} className="border-l-4 border-accent pl-6">
-                  <p className="font-semibold text-foreground">{cert.name}</p>
-                  <p className="text-sm text-muted-foreground">{cert.details}</p>
-                  {cert.extra && (
-                    <p className="text-xs text-muted-foreground mt-1">{cert.extra}</p>
-                  )}
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-2xl font-bold mb-6 text-foreground flex items-center gap-2">
+                <Code2 className="w-6 h-6 text-secondary" />
+                Trilha Databricks
+              </h3>
+              <div className="space-y-3 rounded-2xl border border-border bg-card/80 p-5">
+                {databricksCerts.map((cert) => (
+                  <div key={cert.name} className="space-y-1 text-sm text-muted-foreground">
+                    <p className="font-semibold text-foreground">{cert.name}</p>
+                    <p>{cert.details}</p>
+                    {cert.extra && <p className="text-xs">{cert.extra}</p>}
+                  </div>
+                ))}
               </div>
-              ))}
+            </div>
+            <div>
+              <h3 className="text-2xl font-bold mb-6 text-foreground flex items-center gap-2">
+                <Code2 className="w-6 h-6 text-primary" />
+                Outras credenciais
+              </h3>
+              <div className="space-y-3 rounded-2xl border border-border bg-card/60 p-5">
+                {otherCerts.map((cert) => (
+                  <div key={cert.name} className="space-y-1 text-sm text-muted-foreground">
+                    <p className="font-semibold text-foreground">{cert.name}</p>
+                    <p>{cert.details}</p>
+                    {cert.extra && <p className="text-xs">{cert.extra}</p>}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
