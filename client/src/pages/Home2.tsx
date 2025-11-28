@@ -94,7 +94,7 @@ export default function Home2() {
               {stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center"
+                  className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center print-avoid"
                 >
                   <p className={`text-2xl font-semibold ${stat.colorClass}`}>{stat.value}</p>
                   <p className="text-xs uppercase tracking-[0.3em] text-slate-400 mt-1">
@@ -212,7 +212,7 @@ export default function Home2() {
             {clientHighlights.map((client) => (
               <div
                 key={client.name}
-                className="rounded-3xl border border-white/10 bg-white/5 p-6 flex flex-col gap-4"
+                className="rounded-3xl border border-white/10 bg-white/5 p-6 flex flex-col gap-4 print-avoid"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
@@ -252,7 +252,7 @@ export default function Home2() {
           </div>
           <div className="relative space-y-12 before:absolute before:left-6 before:top-0 before:bottom-0 before:w-px before:bg-gradient-to-b before:from-primary/60 before:via-white/20 before:to-transparent">
             {experienceEntries.map((experience, idx) => (
-              <div key={experience.id} className="relative pl-16">
+              <div key={experience.id} className="relative pl-16 print-avoid">
                 <span className="absolute left-0 top-2 w-8 h-8 rounded-full bg-slate-950 border border-white/10 flex items-center justify-center shadow-lg shadow-primary/30">
                   <span className="w-3 h-3 rounded-full bg-gradient-to-br from-primary to-secondary" />
                   {idx < experienceEntries.length - 1 && (
@@ -312,7 +312,7 @@ export default function Home2() {
               return (
                 <div
                   key={stack.category}
-                  className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 p-6"
+                  className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 p-6 print-avoid"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <p className="text-lg font-semibold text-white">{stack.category}</p>
@@ -389,7 +389,7 @@ export default function Home2() {
             {aiInitiatives.map((initiative) => (
               <div
                 key={initiative.title}
-                className="rounded-3xl border border-white/10 bg-white/5 p-6 flex flex-col gap-4"
+                className="rounded-3xl border border-white/10 bg-white/5 p-6 flex flex-col gap-4 print-avoid"
               >
                 <div>
                   <p className="text-sm text-primary/90 uppercase tracking-[0.3em]">
@@ -418,7 +418,7 @@ export default function Home2() {
               return (
                 <div
                   key={project.title}
-                  className="rounded-3xl border border-white/10 bg-white/5 p-6 flex items-start justify-between gap-3"
+                  className="rounded-3xl border border-white/10 bg-white/5 p-6 flex items-start justify-between gap-3 print-avoid"
                 >
                   <div>
                     <p className="text-sm uppercase tracking-[0.3em] text-primary/70">
@@ -445,7 +445,7 @@ export default function Home2() {
                 <a
                   key={article.title}
                   href={article.link}
-                  className="block rounded-2xl border border-white/10 bg-white/5 p-4 hover:border-primary/60 transition-colors"
+                  className="block rounded-2xl border border-white/10 bg-white/5 p-4 hover:border-primary/60 transition-colors print-avoid"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
@@ -471,7 +471,7 @@ export default function Home2() {
               {talks.map((talk) => (
                 <div
                   key={talk.title}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-4"
+                  className="rounded-2xl border border-white/10 bg-white/5 p-4 print-avoid"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
@@ -501,7 +501,7 @@ export default function Home2() {
             {educationEntries.map((education) => (
               <div
                 key={education.course}
-                className="rounded-2xl border border-white/10 bg-white/5 p-4"
+                className="rounded-2xl border border-white/10 bg-white/5 p-4 print-avoid"
               >
                 <p className="text-sm text-primary/70 uppercase tracking-[0.3em]">
                   {education.period}
@@ -532,20 +532,26 @@ export default function Home2() {
             </div>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="rounded-3xl border border-primary/30 bg-primary/5 p-6 space-y-4">
+            <div className="rounded-3xl border border-primary/30 bg-primary/5 p-6 space-y-4 print-avoid">
               <p className="text-xs uppercase tracking-[0.4em] text-primary">Trilha Databricks</p>
               {databricksCerts.map((cert) => (
-                <div key={cert.name} className="rounded-2xl border border-primary/20 bg-black/20 p-4 space-y-1">
+                <div
+                  key={cert.name}
+                  className="rounded-2xl border border-primary/20 bg-black/20 p-4 space-y-1 print-avoid"
+                >
                   <p className="text-sm font-semibold text-white">{cert.name}</p>
                   <p className="text-sm text-slate-300">{cert.details}</p>
                   {cert.extra && <p className="text-xs text-slate-500">{cert.extra}</p>}
                 </div>
               ))}
             </div>
-            <div className="rounded-3xl border border-secondary/30 bg-secondary/5 p-6 space-y-4">
+            <div className="rounded-3xl border border-secondary/30 bg-secondary/5 p-6 space-y-4 print-avoid">
               <p className="text-xs uppercase tracking-[0.4em] text-secondary">Outras credenciais</p>
               {otherCerts.map((cert) => (
-                <div key={cert.name} className="rounded-2xl border border-secondary/20 bg-black/20 p-4 space-y-1">
+                <div
+                  key={cert.name}
+                  className="rounded-2xl border border-secondary/20 bg-black/20 p-4 space-y-1 print-avoid"
+                >
                   <p className="text-sm font-semibold text-white">{cert.name}</p>
                   <p className="text-sm text-slate-300">{cert.details}</p>
                   {cert.extra && <p className="text-xs text-slate-500">{cert.extra}</p>}
@@ -564,7 +570,7 @@ export default function Home2() {
             {professionalDifferentials.map((diff) => (
               <div
                 key={diff}
-                className="flex gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-200"
+                className="flex gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-200 print-avoid"
               >
                 <div className="w-2 h-2 rounded-full bg-gradient-to-b from-primary to-secondary mt-2" />
                 {diff}
