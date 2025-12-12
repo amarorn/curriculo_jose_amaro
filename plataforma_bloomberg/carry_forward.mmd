@@ -1,0 +1,9 @@
+sequenceDiagram
+    participant D as dm_date
+    participant H as Histórico de Preços
+    participant CF as Carry-Forward Engine
+
+    D->>CF: Data sem preço
+    H->>CF: Último PX_LAST válido
+    CF-->>CF: last(PX_LAST, ignorenulls)
+    CF-->>H: PX_LAST_ALTERADO
