@@ -1,0 +1,10 @@
+flowchart TB
+    P[PX_LAST_ALTERADO] --> W30[Janela 30 dias]
+    P --> W60[Janela 60 dias]
+    P --> W90[Janela 90 dias]
+    P --> W365[Janela 365 dias]
+
+    W30 --> AVG30[AVG_PX_LAST_30D]
+    W60 --> AVG60[AVG_PX_LAST_60D]
+    W90 --> AVG90[AVG_PX_LAST_90D]
+    W365 --> AVG365[AVG_PX_LAST_365D]
