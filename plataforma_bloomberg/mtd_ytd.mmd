@@ -1,0 +1,9 @@
+sequenceDiagram
+    participant S as Série Diária
+    participant B as Preço Base
+    participant C as Cálculo
+
+    S->>B: Primeiro dia útil
+    S->>C: Preço atual
+    B->>C: Base MTD/YTD
+    C-->>S: CHG_NET / CHG_PCT
