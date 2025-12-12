@@ -1,0 +1,11 @@
+flowchart LR
+    T[Triggers<br/>Schedule / Manual / Evento] --> ADF[Azure Data Factory]
+    ADF --> FN[Azure Functions]
+    FN --> RAW[(ADLS Gen2<br/>RAW)]
+    RAW --> DBT[Databricks<br/>Trusted]
+    DBT --> DBR[Databricks<br/>Refined]
+    DBR --> BI[Power BI / APIs / SQL]
+
+    KV[Azure Key Vault] --> FN
+    KV --> DBT
+    KV --> DBR
