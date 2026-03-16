@@ -44,6 +44,9 @@ const devStack = [
   { label: "Dataflow", color: "bg-pink-500/15 text-pink-300 border-pink-500/30" },
   { label: "Databricks", color: "bg-red-500/15 text-red-300 border-red-500/30" },
   { label: "CI/CD", color: "bg-indigo-500/15 text-indigo-300 border-indigo-500/30" },
+  { label: "Flutter", color: "bg-teal-500/15 text-teal-300 border-teal-500/30" },
+  { label: "Swift", color: "bg-orange-600/15 text-orange-300 border-orange-600/30" },
+  { label: "React Native", color: "bg-cyan-600/15 text-cyan-300 border-cyan-600/30" },
 ];
 
 const devHighlightIcons = [Code2, Database, Cloud, BrainCircuit];
@@ -114,8 +117,8 @@ export default function Home8() {
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
         {/* Hero */}
-        <section className="grid lg:grid-cols-5 gap-10 items-start">
-          <div className="lg:col-span-3 space-y-7">
+        <section id="pdf-hero" className="grid md:grid-cols-5 gap-10 items-start">
+          <div id="pdf-hero-main" className="md:col-span-3 space-y-7">
             <div className="space-y-3">
               <div className="flex items-center gap-2 font-mono text-xs text-[#7d8590]">
                 <span className="text-green-400">$</span>
@@ -182,7 +185,7 @@ export default function Home8() {
             </div>
           </div>
 
-          <div className="lg:col-span-2 space-y-4">
+          <div id="pdf-hero-photo" className="md:col-span-2 space-y-4">
             {heroInfo.photo?.src && (
               <div className="relative rounded-2xl overflow-hidden border border-white/[0.08]">
                 <img
