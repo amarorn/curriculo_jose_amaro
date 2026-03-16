@@ -334,6 +334,59 @@ export const featuredProjects = [
   },
 ];
 
+export const githubProjects = [
+  {
+    name: "Aureon",
+    repo: "amarorn/aureon",
+    url: "https://github.com/amarorn/aureon",
+    subtitle: "Plataforma SaaS de CRM & Automação de Vendas",
+    description:
+      "SaaS multi-tenant para gestão de relacionamento, comunicação e análise de vendas com event streaming em tempo real.",
+    tags: ["NestJS", "Next.js", "Kafka", "ClickHouse", "PostgreSQL", "Redis", "WebSockets"],
+    accentColor: "violet",
+  },
+  {
+    name: "DataCompass 1.0",
+    repo: "amarorn/dataCompass1.0",
+    url: "https://github.com/amarorn/dataCompass1.0",
+    subtitle: "WhatsApp Analytics Platform",
+    description:
+      "Plataforma de analytics de clientes via WhatsApp com Clean Architecture, orquestração em Kubernetes (EKS) e infraestrutura como código com Terraform.",
+    tags: ["Node.js", "TypeScript", "Kubernetes", "Terraform", "AWS EKS", "GitHub Actions"],
+    accentColor: "green",
+  },
+  {
+    name: "Track Data Platform",
+    repo: "amarorn/data-pipeline-track",
+    url: "https://github.com/amarorn/data-pipeline-track",
+    subtitle: "Pipeline Oracle → ClickHouse com PySpark",
+    description:
+      "Plataforma de dados com orquestração PySpark, camadas bronze/silver/gold, catálogo de lineage via FastAPI e infraestrutura Docker Compose.",
+    tags: ["PySpark", "ClickHouse", "Oracle", "FastAPI", "Python", "Docker"],
+    accentColor: "blue",
+  },
+  {
+    name: "EvoFit AI",
+    repo: "amarorn/EvoFit-AI",
+    url: "https://github.com/amarorn/EvoFit-AI",
+    subtitle: "Personal Trainer com IA Generativa",
+    description:
+      "App de treino personalizado que utiliza IA para gerar planos adaptativos. Monorepo com NestJS (Clean Architecture) no backend e React/Vite no frontend.",
+    tags: ["NestJS", "React", "TypeScript", "PostgreSQL", "IA Generativa", "Docker"],
+    accentColor: "pink",
+  },
+  {
+    name: "Demandas",
+    repo: "amarorn/demandas",
+    url: "https://github.com/amarorn/demandas",
+    subtitle: "Sistema Fullstack Moderno",
+    description:
+      "Fullstack completo com FastAPI + Clean Architecture no backend, React 18 + Framer Motion no frontend e containerização com Docker/Nginx.",
+    tags: ["FastAPI", "Python", "React", "MongoDB", "Docker", "Tailwind"],
+    accentColor: "orange",
+  },
+];
+
 export const articles = [
   {
     title: "Arquitetura de Pipelines Distribuídos com Dataflow",

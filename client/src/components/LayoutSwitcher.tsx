@@ -8,10 +8,11 @@ const layoutOptions = [
   { id: "E", label: "Layout E", href: "/layout-e" },
   { id: "F", label: "Layout F", href: "/layout-f" },
   { id: "G", label: "Layout G", href: "/layout-g" },
+  { id: "H", label: "Layout H", href: "/layout-h" },
 ];
 
 interface LayoutSwitcherProps {
-  active: "A" | "B" | "C" | "D" | "E" | "F" | "G";
+  active: "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H";
   className?: string;
 }
 
