@@ -39,6 +39,15 @@ export const pt: ResumeLocale = {
 
   experience: [
     {
+      title: "ASW e Dev Sênior",
+      description:
+        "Atuação como Arquiteto de Soluções e Desenvolvedor Sênior em projetos de produto e engenharia, com foco em arquitetura cloud, APIs e entrega de valor.",
+      highlights: [
+        "Arquitetura de soluções e desenvolvimento sênior em stack moderno",
+        "Entrega de produtos e engenharia com foco em qualidade e governança",
+      ],
+    },
+    {
       title: "Arquiteto de Dados Sênior",
       description:
         "Responsável por arquitetar soluções críticas em um ambiente híbrido, liderando trilhas de modernização e coordenando o time de engenharia de dados dedicado à área de Suprimentos. Stack Databricks + Azure (Delta Lake, Synapse e Purview) com arquitetura em medalhão.",

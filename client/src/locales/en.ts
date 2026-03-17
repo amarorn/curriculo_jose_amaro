@@ -39,6 +39,15 @@ export const en: ResumeLocale = {
 
   experience: [
     {
+      title: "ASW & Senior Dev",
+      description:
+        "Solutions Architect and Senior Developer on product and engineering projects, with focus on cloud architecture, APIs and value delivery.",
+      highlights: [
+        "Solutions architecture and senior development on modern stack",
+        "Product delivery and engineering with focus on quality and governance",
+      ],
+    },
+    {
       title: "Senior Data Architect",
       description:
         "Responsible for architecting critical solutions in a hybrid environment, leading modernization tracks and coordinating the data engineering team dedicated to the Procurement area. Databricks + Azure stack (Delta Lake, Synapse and Purview) with medallion architecture.",

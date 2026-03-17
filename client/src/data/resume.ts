@@ -209,11 +209,24 @@ export const aiInitiatives = [
 
 export const experienceEntries = [
   {
+    id: "a2f",
+    title: "ASW e Dev Sênior",
+    company: "A2F",
+    date: "Jan 2026 – Atual",
+    location: "Remoto",
+    description:
+      "Atuação como Arquiteto de Soluções e Desenvolvedor Sênior em projetos de produto e engenharia, com foco em arquitetura cloud, APIs e entrega de valor.",
+    highlights: [
+      "Arquitetura de soluções e desenvolvimento sênior em stack moderno",
+      "Entrega de produtos e engenharia com foco em qualidade e governança",
+    ],
+  },
+  {
     id: "arcelor",
     title: "Arquiteto de Dados Sênior",
     company: "ArcelorMittal Sistemas",
-    date: "Fev 2025 – Atual",
-    location: "Remoto / São Paulo",
+    date: "Fev 2025 – Dez 2025",
+    location: "Remoto / BH",
     description:
       "Responsável por arquitetar soluções críticas em um ambiente híbrido, liderando trilhas de modernização e coordenando o time de engenharia de dados dedicado à área de Suprimentos. Stack Databricks + Azure (Delta Lake, Synapse e Purview) com arquitetura em medalhão, estabelecendo indicadores de governança, automação e redução de SLA crítico, além de Python, UC4, BizAgi e Confluence para garantir fluxos auditáveis e resilientes.",
     highlights: [
@@ -228,7 +241,7 @@ export const experienceEntries = [
     id: "beanalytic",
     title: "CTO & Principal Data Architect",
     company: "BeAnalytic",
-    date: "Jan 2021 – Atual",
+    date: "Jan 2021 – Jan 2025",
     location: "São Paulo / Remoto",
     description:
       "Liderança técnica e estratégica em soluções de dados, IA generativa e visão computacional. Responsável por roadmaps, squads e entrega de produtos para clientes enterprise como Banco BV, ArcelorMittal e Engefotos.",

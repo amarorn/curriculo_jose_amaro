@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const LANG = (process.argv[2] ?? "pt") as "pt" | "en" | "es";
 const LANG_LABEL: Record<string, string> = { pt: "pt", en: "en", es: "es" };
 const OUTPUT = path.resolve(__dirname, `../jose-amaro-cv-${LANG_LABEL[LANG]}.pdf`);
-const URL = "http://localhost:3000";
+const URL = process.env.PDF_BASE_URL ?? "http://localhost:3000";
 
 const PRINT_CSS = `
   /* ── Garantir cores no print ── */
